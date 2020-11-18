@@ -7,10 +7,12 @@ console.log(user); /* output Anton */
 
 let test = 1;
 test += 1;
-console.log(test); /*output 2*/
+console.log(test);/*output 2*/
+test += '1';
+console.log(test);/*output 21*/
 test -= 1;
-console.log(test); /*output 1*/
-test = " ";
+console.log(test); /*output 20*/
+test = ' ';
 console.log(!!test); /*output true*/
 
 
@@ -22,15 +24,15 @@ for (i = 0; i < arr.length; i++) {
 console.log(result);
 
 const arr2 = [2, 5, 8, 15, 0, 6, 20, 3];
-for (i=0; i<arr2.length; i++ ) {
+for (i = 0; i < arr2.length; i++) {
     if (arr2[i] > 5 && arr2[i] < 10) {
         console.log(arr2[i]);
     }
 }
 
 const arr3 = [2, 5, 8, 15, 0, 6, 20, 3];
-for (i=0; i<arr3.length; i++ ) {
-    if ((arr3[i] % 2) === 0 && arr3[i] !== 0 ) {
+for (i = 0; i < arr3.length; i++) {
+    if ((arr3[i] % 2) === 0 && arr3[i] !== 0) {
         console.log(arr3[i]);
     }
 }
