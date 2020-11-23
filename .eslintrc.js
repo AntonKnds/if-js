@@ -12,6 +12,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    ["no-console"]: "off"
+    ['no-console']: 0,
+    ['linebreak-style']: 0,
+    ['no-multiple-empty-lines']: 0,
   },
 };

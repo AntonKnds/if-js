@@ -1,43 +1,66 @@
-let user = "John Doe";
-console.log(user);
-const student = "Anton";
-console.log(student);
-user = student;
-console.log(user); /* output Anton */
-
-let test = 1;
-test += 1;
-console.log(test);/*output 2*/
-test += '1';
-console.log(test);/*output 21*/
-test -= 1;
-console.log(test); /*output 20*/
-test = ' ';
-console.log(!!test); /*output true*/
-
-
-const arr = [2, 3, 5, 8];
-let result = 1;
-for (i = 0; i < arr.length; i++) {
-    result *= arr[i];
-}
-console.log(result);
-
-const arr2 = [2, 5, 8, 15, 0, 6, 20, 3];
-for (i = 0; i < arr2.length; i++) {
-    if (arr2[i] > 5 && arr2[i] < 10) {
-        console.log(arr2[i]);
+/*1*/
+function palindrome(p) {
+    for (i = (p.length); i--; i != 0) {
+        for (j = 0; j < p.length; j++) {
+            if (p[i] == p[j]) {
+                return true;
+            }
+            return false;
+        }
     }
 }
 
-const arr3 = [2, 5, 8, 15, 0, 6, 20, 3];
-for (i = 0; i < arr3.length; i++) {
-    if ((arr3[i] % 2) === 0 && arr3[i] !== 0) {
-        console.log(arr3[i]);
+console.log(palindrome('шалаш'));
+console.log(palindrome('кок'));
+console.log(palindrome('антон'));
+
+/*2*/
+function min(a, b) {
+    if (a < b) {
+        return a;
     }
+    return b;
 }
 
+function max(a, b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
 
+console.log(min(3, 4));
+console.log(max(5, 6));
+
+
+function maxMin(a, b) {
+    return a > b ? a : b;
+}
+
+console.log(maxMin(5, 4));
+
+
+/*3*/
+
+
+const myArr = [];
+for (i = 0; i < 100; i++) {
+    myArr.push(Math.round(Math.random() * i));
+}
+console.log(myArr);
+
+let myFunction = function (arr) {
+    for (i = 0; i < arr.length; i++) {
+        let arrSymbol = arr[i].toString();
+        if (arrSymbol.endsWith('0')) {
+            arrSymbol = arrSymbol.replace('0', 'zero');
+            arr[i] = arrSymbol;
+        }
+    }
+    console.log(arr);
+}
+
+myFunction(myArr);
 
 
 
