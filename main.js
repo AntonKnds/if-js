@@ -9,6 +9,7 @@ function palindrome(p) {
     }
   }
 }
+
 console.log(palindrome('шалаш'));
 console.log(palindrome('кок'));
 console.log(palindrome('антон'));
@@ -61,9 +62,40 @@ let myFunction = function (arr) {
 
 myFunction(myArr);
 
+/* lesson-4 */
 
+/*1*/
 
+function sum(a) {
+  return function (b) {
+    return a + b;
+  }
+}
 
+console.log(sum(5)(4));
+
+/*2*/
+const text1El = document.getElementById("text1");
+const text2El = document.getElementById("text2");
+const text3El = document.getElementById("text3");
+
+const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+let counter1 = -1;
+let counter2 = -1;
+let counter3 = -1;
+
+text1El.addEventListener('click', () => {
+  counter1 = counter1 + 1;
+  text1El.style.color = colors[counter1];
+})
+text2El.addEventListener('click', () => {
+  counter2 = counter2 + 1;
+  text2El.style.color = colors[counter2];
+})
+text3El.addEventListener('click', () => {
+  counter3 = counter3 + 1;
+  text3El.style.color = colors[counter3];
+})
 
 
 
