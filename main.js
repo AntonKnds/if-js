@@ -1,11 +1,11 @@
-
 function newPalindrome(word) {
   let newWord = word.split("").reverse();
-    for ( i = 0; i < newWord.length; i++) {
-      if (word[i] === newWord [i]) {
-        return true;
-      } return false;
+  for (i = 0; i < newWord.length; i++) {
+    if (word[i] === newWord [i]) {
+      return true;
     }
+    return false;
+  }
 }
 
 
@@ -85,6 +85,7 @@ function sum(a) {
     return a + b;
   }
 }
+
 console.log(sum(5)(4));
 
 /*2*/
@@ -96,15 +97,16 @@ const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
 text1El.addEventListener('click', addCounter());
 text2El.addEventListener('click', addCounter());
-text3El.addEventListener('click', addCounter()) ;
+text3El.addEventListener('click', addCounter());
 
 function addCounter() {
   let counter = 0;
-  return function() {
-    if(counter < 4) {
-      counter ++;
+  return function () {
+    if (counter < 4) {
+      counter++;
       return this.style.color = colors[counter];
-    } counter = 0;
+    }
+    counter = 0;
   }
 }
 
