@@ -101,14 +101,11 @@ text3El.addEventListener('click', addCounter());
 
 function addCounter() {
   let counter = 0;
-  return function () {
-    if (counter < 4) {
-      counter++;
-      return this.style.color = colors[counter];
-    }
-    counter = 0;
+  return function (event) {
+    event.target.style.color = colors[counter];
+    counter = counter > 3 ? 0 : counter + 1;
   }
-}
+};
 
 
 
