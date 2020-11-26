@@ -1,3 +1,16 @@
+function newPalindrome(word) {
+  let newWord = word.split("").reverse();
+    for ( i = 0; i < newWord.length; i++) {
+      if (word[i] === newWord [i]) {
+        return true;
+      } return false;
+    }
+}
+
+
+console.log(newPalindrome("anttna"));
+console.log(newPalindrome("oanttnoa"));
+
 /*1*/
 function palindrome(p) {
   for (i = (p.length); i--; i != 0) {
@@ -71,7 +84,6 @@ function sum(a) {
     return a + b;
   }
 }
-
 console.log(sum(5)(4));
 
 /*2*/
@@ -85,8 +97,10 @@ let counter2 = -1;
 let counter3 = -1;
 
 text1El.addEventListener('click', () => {
-  counter1 = counter1 + 1;
-  text1El.style.color = colors[counter1];
+  if (counter1 <= 4) {
+    counter1 = counter1 + 1;
+    text1El.style.color = colors[counter1];
+  } else (counter1 = -1);
 })
 text2El.addEventListener('click', () => {
   counter2 = counter2 + 1;
