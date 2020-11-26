@@ -1,3 +1,4 @@
+
 function newPalindrome(word) {
   let newWord = word.split("").reverse();
     for ( i = 0; i < newWord.length; i++) {
@@ -92,24 +93,22 @@ const text2El = document.getElementById("text2");
 const text3El = document.getElementById("text3");
 
 const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-let counter1 = -1;
-let counter2 = -1;
-let counter3 = -1;
 
-text1El.addEventListener('click', () => {
-  if (counter1 <= 4) {
-    counter1 = counter1 + 1;
-    text1El.style.color = colors[counter1];
-  } else (counter1 = -1);
-})
-text2El.addEventListener('click', () => {
-  counter2 = counter2 + 1;
-  text2El.style.color = colors[counter2];
-})
-text3El.addEventListener('click', () => {
-  counter3 = counter3 + 1;
-  text3El.style.color = colors[counter3];
-})
+text1El.addEventListener('click', addCounter());
+text2El.addEventListener('click', addCounter());
+text3El.addEventListener('click', addCounter()) ;
+
+function addCounter() {
+  let counter = 0;
+  return function() {
+    if(counter < 4) {
+      counter ++;
+      return this.style.color = colors[counter];
+    } counter = 0;
+  }
+}
+
+
 
 
 
