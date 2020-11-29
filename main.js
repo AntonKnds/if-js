@@ -1,117 +1,60 @@
-function newPalindrome(word) {
-  let newWord = word.split("").reverse();
-  for (i = 0; i < newWord.length; i++) {
-    if (word[i] === newWord [i]) {
-      return true;
-    }
-    return false;
-  }
-}
-
-
-console.log(newPalindrome("anttna"));
-console.log(newPalindrome("oanttnoa"));
-
 /*1*/
-function palindrome(p) {
-  for (i = (p.length); i--; i != 0) {
-    for (j = 0; j < p.length; j++) {
-      if (p[i] == p[j]) {
-        return true;
-      }
-      return false;
-    }
-  }
-}
-
-console.log(palindrome('шалаш'));
-console.log(palindrome('кок'));
-console.log(palindrome('антон'));
+const date = '2020-11-26';
+let newDate = date.split("-").reverse().join(".");
+console.log(newDate);
 
 /*2*/
-function min(a, b) {
-  if (a < b) {
-    return a;
-  }
-  return b;
+const data = [
+  {
+    country: 'Russia',
+    city: 'Saint Petersburg',
+    hotel: 'Hotel Leopold',
+  },
+  {
+    country: 'Spain',
+    city: 'Santa Cruz de Tenerife',
+    hotel: 'Apartment Sunshine',
+  },
+  {
+    country: 'Slowakia',
+    city: 'Vysokie Tatry',
+    hotel: 'Villa Kunerad',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hostel Friendship',
+  },
+  {
+    country: 'Indonesia',
+    city: 'Bali',
+    hotel: 'Ubud Bali Resort&SPA',
+  },
+  {
+    country: 'Netherlands',
+    city: 'Rotterdam',
+    hotel: 'King Kong Hostel',
+  },
+  {
+    country: 'Marocco',
+    city: 'Ourika',
+    hotel: 'Rokoko Hotel',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hotel Rehberge Berlin Mitte',
+  },
+];
+
+const findWord = function(str) {
+  let newStr = new RegExp(str, 'gi');
+  data.forEach(function (i) {
+    if (!(i.country.search(newStr)) || !(i.city.search(newStr)) || !(i.hotel.search(newStr))) {
+      console.log ("Страна: " + i.country + "\nГород: " + i.city + "\nОтель: " + i.hotel);
+    };
+  })
 }
 
-function max(a, b) {
-  if (a > b) {
-    return a;
-  }
-  return b;
-}
-
-console.log(min(3, 4));
-console.log(max(5, 6));
-
-
-function maxMin(a, b) {
-  return a > b ? a : b;
-}
-
-console.log(maxMin(5, 4));
-
-
-/*3*/
-
-
-const myArr = [];
-
-let myFunction = function (arr) {
-  for (i = 0; i < 100; i++) {
-    myArr.push(Math.round(Math.random() * i));
-  }
-  console.log(myArr);
-  for (i = 0; i < arr.length; i++) {
-    let arrSymbol = arr[i].toString();
-    if (arrSymbol.endsWith('0')) {
-      arrSymbol = arrSymbol.replace('0', 'zero');
-      arr[i] = arrSymbol;
-    }
-  }
-  console.log(arr);
-}
-
-myFunction(myArr);
-
-/* lesson-4 */
-
-/*1*/
-
-function sum(a) {
-  return function (b) {
-    return a + b;
-  }
-}
-
-console.log(sum(5)(4));
-
-/*2*/
-const text1El = document.getElementById("text1");
-const text2El = document.getElementById("text2");
-const text3El = document.getElementById("text3");
-
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-
-text1El.addEventListener('click', addCounter());
-text2El.addEventListener('click', addCounter());
-text3El.addEventListener('click', addCounter());
-
-function addCounter() {
-  let counter = 0;
-  return function (event) {
-    event.target.style.color = colors[counter];
-    counter = counter > 3 ? 0 : counter + 1;
-  }
-};
-
-
-
-
-
-
-
-
+findWord('Berlin');
 
