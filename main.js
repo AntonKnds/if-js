@@ -48,13 +48,17 @@ const data = [
 ];
 
 const findWord = function(str) {
-  let newStr = new RegExp(str, 'gi');
+  let newStr = new RegExp(str, 'ig');
   data.forEach(function (i) {
-    if (!(i.country.search(newStr)) || !(i.city.search(newStr)) || !(i.hotel.search(newStr))) {
-      console.log ("Страна: " + i.country + "\nГород: " + i.city + "\nОтель: " + i.hotel);
-    };
-  })
+    if (newStr.test(i["country"]) || (newStr.test(i["city"])) || (newStr.test(i["hotel"]))) {
+      console.log ("Страна: " + i["country"] + "\nГород: " + i["city"] + "\nОтель: " + i["hotel"]);
+    }
+  });
 }
+findWord('lin');
 
-findWord('Berlin');
+
+
+
+
 
