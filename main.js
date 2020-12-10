@@ -1,117 +1,103 @@
-function newPalindrome(word) {
-  let newWord = word.split("").reverse();
-  for (i = 0; i < newWord.length; i++) {
-    if (word[i] === newWord [i]) {
-      return true;
-    }
-    return false;
-  }
-}
+// /*1*/
+// const date = '2020-11-26';
+// let newDate = date.split("-").reverse().join(".");
+// console.log(newDate);
+//
+// /*2*/
+// const data = [
+//   {
+//     country: 'Russia',
+//     city: 'Saint Petersburg',
+//     hotel: 'Hotel Leopold',
+//   },
+//   {
+//     country: 'Spain',
+//     city: 'Santa Cruz de Tenerife',
+//     hotel: 'Apartment Sunshine',
+//   },
+//   {
+//     country: 'Slowakia',
+//     city: 'Vysokie Tatry',
+//     hotel: 'Villa Kunerad',
+//   },
+//   {
+//     country: 'Germany',
+//     city: 'Berlin',
+//     hotel: 'Hostel Friendship',
+//   },
+//   {
+//     country: 'Indonesia',
+//     city: 'Bali',
+//     hotel: 'Ubud Bali Resort&SPA',
+//   },
+//   {
+//     country: 'Netherlands',
+//     city: 'Rotterdam',
+//     hotel: 'King Kong Hostel',
+//   },
+//   {
+//     country: 'Marocco',
+//     city: 'Ourika',
+//     hotel: 'Rokoko Hotel',
+//   },
+//   {
+//     country: 'Germany',
+//     city: 'Berlin',
+//     hotel: 'Hotel Rehberge Berlin Mitte',
+//   },
+// ];
+//
+// const findWord = function(str) {
+//   let newStr = new RegExp(str, 'ig');
+//   data.forEach(function (i) {
+//     if (newStr.test(i["country"]) || (newStr.test(i["city"])) || (newStr.test(i["hotel"]))) {
+//       console.log ("Страна: " + i["country"] + "\nГород: " + i["city"] + "\nОтель: " + i["hotel"]);
+//     }
+//   });
+// }
+// findWord('ri');
+
+function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) {
+  let calendar = [];
+  let days = [];
 
 
-console.log(newPalindrome("anttna"));
-console.log(newPalindrome("oanttnoa"));
+  if (dayOfWeek >= daysInWeek) {
+    throw new Error("incorrect date");
+  };
 
-/*1*/
-function palindrome(p) {
-  for (i = (p.length); i--; i != 0) {
-    for (j = 0; j < p.length; j++) {
-      if (p[i] == p[j]) {
-        return true;
-      }
-      return false;
-    }
-  }
-}
-
-console.log(palindrome('шалаш'));
-console.log(palindrome('кок'));
-console.log(palindrome('антон'));
-
-/*2*/
-function min(a, b) {
-  if (a < b) {
-    return a;
-  }
-  return b;
-}
-
-function max(a, b) {
-  if (a > b) {
-    return a;
-  }
-  return b;
-}
-
-console.log(min(3, 4));
-console.log(max(5, 6));
-
-
-function maxMin(a, b) {
-  return a > b ? a : b;
-}
-
-console.log(maxMin(5, 4));
-
-
-/*3*/
-
-
-const myArr = [];
-
-let myFunction = function (arr) {
-  for (i = 0; i < 100; i++) {
-    myArr.push(Math.round(Math.random() * i));
-  }
-  console.log(myArr);
-  for (i = 0; i < arr.length; i++) {
-    let arrSymbol = arr[i].toString();
-    if (arrSymbol.endsWith('0')) {
-      arrSymbol = arrSymbol.replace('0', 'zero');
-      arr[i] = arrSymbol;
-    }
-  }
-  console.log(arr);
-}
-
-myFunction(myArr);
-
-/* lesson-4 */
-
-/*1*/
-
-function sum(a) {
-  return function (b) {
-    return a + b;
-  }
-}
-
-console.log(sum(5)(4));
-
-/*2*/
-const text1El = document.getElementById("text1");
-const text2El = document.getElementById("text2");
-const text3El = document.getElementById("text3");
-
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-
-text1El.addEventListener('click', addCounter());
-text2El.addEventListener('click', addCounter());
-text3El.addEventListener('click', addCounter());
-
-function addCounter() {
-  let counter = 0;
-  return function (event) {
-    event.target.style.color = colors[counter];
-    counter = counter > 3 ? 0 : counter + 1;
-  }
+  if (dayOfWeek !== 0) {
+    for (let i = (daysInMonth - dayOfWeek + 1); i <= daysInMonth; i++) {
+      days.push({
+        currentDay: i,
+        currentMonth: false,
+        selectDay: (checkInDate == i || checkOutDate == i),
+      });
+    };
+  };
+  for (let i = 1; i <= daysInMonth; i++) {
+    days.push({
+      currentDay: i,
+      currentMonth: true,
+      selectDay: (checkInDate == i || checkOutDate == i),
+    });
+    if (days.length >= daysInWeek) {
+      let week = days.splice(0, daysInWeek);
+      calendar.push(week);
+    };
+  };
+  if ((days.length < daysInWeek) && days.length !== 0) {
+    calendar.push(days);
+    for (let i = 1; days.length < daysInWeek; i++) {
+      days.push({
+        currentDay: i,
+        currentMonth: false,
+        selectDay: (checkInDate == i || checkOutDate == i),
+      });
+    };
+  };
+  return (calendar);
 };
 
-
-
-
-
-
-
-
+console.log(getCalendarMonth(30, 7, 6, 15, 20));
 
