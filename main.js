@@ -60,6 +60,7 @@
 function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) {
   let calendar = [];
   let days = [];
+  let week = [];
 
 
   if (dayOfWeek >= daysInWeek) {
@@ -82,7 +83,7 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
       selectDay: (checkInDate == i || checkOutDate == i),
     });
     if (days.length >= daysInWeek) {
-      let week = days.splice(0, daysInWeek);
+      week = days.splice(0, daysInWeek);
       calendar.push(week);
     };
   };
@@ -99,5 +100,5 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
   return (calendar);
 };
 
-console.log(getCalendarMonth(30, 7, 6, 15, 20));
+console.log(getCalendarMonth(31, 7, 6, 15, 20));
 
