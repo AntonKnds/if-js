@@ -50,11 +50,9 @@ class Student extends User {
 
 class Students {
   constructor(students) {
-    // console.log(new Student());
     this.students = students.flatMap(function ({firstName, lastName, admissionYear, courseName}) {
       return (new Student(firstName, lastName, admissionYear, courseName));
     });
-    // console.log(this.students);
   }
 }
 
@@ -64,7 +62,6 @@ Students.prototype.getInfo = function () {
     result.push(`${element.fullName} - ${element.courseName} - ${element.course} курс`);
   })
   return result;
-
 };
 
 const students = new Students(studentsData);
