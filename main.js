@@ -1,81 +1,74 @@
-/*1*/
-const date = '2020-11-26';
-let newDate = date.split("-").reverse().join(".");
-console.log(newDate);
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
+  },
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
+  },
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
+  },
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
+  }
+]
 
-/*2*/
-const data = [
-  {
-    country: 'Russia',
-    city: 'Saint Petersburg',
-    hotel: 'Hotel Leopold',
-  },
-  {
-    country: 'Spain',
-    city: 'Santa Cruz de Tenerife',
-    hotel: 'Apartment Sunshine',
-  },
-  {
-    country: 'Slowakia',
-    city: 'Vysokie Tatry',
-    hotel: 'Villa Kunerad',
-  },
-  {
-    country: 'Germany',
-    city: 'Berlin',
-    hotel: 'Hostel Friendship',
-  },
-  {
-    country: 'Indonesia',
-    city: 'Bali',
-    hotel: 'Ubud Bali Resort&SPA',
-  },
-  {
-    country: 'Netherlands',
-    city: 'Rotterdam',
-    hotel: 'King Kong Hostel',
-  },
-  {
-    country: 'Marocco',
-    city: 'Ourika',
-    hotel: 'Rokoko Hotel',
-  },
-  {
-    country: 'Germany',
-    city: 'Berlin',
-    hotel: 'Hotel Rehberge Berlin Mitte',
-  },
-];
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
-const findWord = function(str) {
-  let newStr = new RegExp(str, 'ig');
-  data.forEach(function (i) {
-    if (newStr.test(i["country"]) || (newStr.test(i["city"])) || (newStr.test(i["hotel"]))) {
-      console.log ("Страна: " + i["country"] + "\nГород: " + i["city"] + "\nОтель: " + i["hotel"]);
-    }
-  });
+  get fullName() {
+    return (this.firstName + " " + this.lastName);
+  }
 }
-findWord('ri');
 
-function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
-  let calendar = [];
-  let days = [];
-  if (dayOfWeek !== 0) {
-    for (let i = (daysInMonth - dayOfWeek+2); i <= daysInMonth; i++) {
-      days.push(i);
-    }
+class Student extends User {
+  constructor(firstName, lastName, admissionYear, courseName) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
   }
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push(i);
+
+  get course() {
+    return (2020 - this.admissionYear);
   }
-  for (let j = 0; j <= (daysInMonth / daysInWeek); j++) {
-    calendar.push(days.splice(0,daysInWeek));
-    let currentWeek = calendar[j];
-      for (let i = 1; currentWeek.length < daysInWeek; i++) {
-        currentWeek.push(i);
-    }
-  }
-console.log(calendar);
 }
-getCalendarMonth(30,6, 2);
+
+class Students {
+  constructor(students) {
+    // console.log(new Student());
+    this.students = students.flatMap(function ({firstName, lastName, admissionYear, courseName}) {
+      return (new Student(firstName, lastName, admissionYear, courseName));
+    });
+    // console.log(this.students);
+  }
+}
+
+Students.prototype.getInfo = function () {
+  const result = [];
+  this.students.forEach(function (element) {
+    result.push(`${element.fullName} - ${element.courseName} - ${element.course} курс`);
+  })
+  return result;
+
+};
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
+
+
 
