@@ -44,7 +44,7 @@ class Student extends User {
   }
 
   get course() {
-    return (2020 - this.admissionYear);
+    return (new Date().getFullYear() - this.admissionYear);
   }
 }
 
@@ -54,18 +54,48 @@ class Students {
       return (new Student(firstName, lastName, admissionYear, courseName));
     });
   }
+
+  getInfo() {
+    const result = [];
+    this.students.forEach(function (element) {
+      result.push(`${element.fullName} - ${element.courseName} - ${element.course} курс`);
+    })
+    return result;
+  }
 }
 
-Students.prototype.getInfo = function () {
-  const result = [];
-  this.students.forEach(function (element) {
-    result.push(`${element.fullName} - ${element.courseName} - ${element.course} курс`);
-  })
-  return result;
-};
-
+console.log(Student instanceof User);
 const students = new Students(studentsData);
 console.log(students.getInfo());
+
+
+//Symbol.iterator//
+
+const text1El = document.getElementById("text1");
+const text2El = document.getElementById("text2");
+const text3El = document.getElementById("text3");
+
+text1El.addEventListener('click', addCounter());
+text2El.addEventListener('click', addCounter());
+text3El.addEventListener('click', addCounter());
+
+let colors = {
+  data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+  [Symbol.iterator]() {
+    return this.data;
+  },
+  next(counter) {
+    return {value: this.data[counter], done: false}
+  }
+};
+
+function addCounter() {
+  let counter = 0;
+  return function (event) {
+    event.target.style.color = colors.next(counter).value;
+    counter = counter > 3 ? 0 : counter + 1;
+  }
+};
 
 
 
