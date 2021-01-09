@@ -1,4 +1,4 @@
-/*const studentsData = [
+const studentsData = [
   {
     firstName: 'Василий',
     lastName: 'Петров',
@@ -90,7 +90,6 @@ function addCounter() {
 };
 
 text.forEach(elem => elem.addEventListener('click', addCounter()));
-*/
 
 //Calendar
 let calendar = [];
