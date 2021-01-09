@@ -1,4 +1,4 @@
-const studentsData = [
+/*const studentsData = [
   {
     firstName: 'Василий',
     lastName: 'Петров',
@@ -64,20 +64,12 @@ class Students {
   }
 }
 
-console.log(Student instanceof User);
 const students = new Students(studentsData);
 console.log(students.getInfo());
 
 
-//Symbol.iterator//
-
-const text1El = document.getElementById("text1");
-const text2El = document.getElementById("text2");
-const text3El = document.getElementById("text3");
-
-text1El.addEventListener('click', addCounter());
-text2El.addEventListener('click', addCounter());
-text3El.addEventListener('click', addCounter());
+//Symbol.iterator
+const text = document.querySelectorAll('p');
 
 let colors = {
   data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
@@ -96,6 +88,79 @@ function addCounter() {
     counter = counter > 3 ? 0 : counter + 1;
   }
 };
+
+text.forEach(elem => elem.addEventListener('click', addCounter()));
+*/
+
+//Calendar
+let calendar = [];
+function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
+  let days = [];
+  let week = [];
+  let lastDayPreviousMonth = getLastDayOfMonth(year, month);
+  let lastDayCurrentMonth = getLastDayOfCurrentMonth(year,month);
+  let offsetDay = offSet(year,month);
+  let currentDay = new Date().getDate();
+
+  function offSet(year, month) {
+    let date = new Date(year, month, 0);
+    return date.getDay();
+  }
+
+  function getLastDayOfMonth(year, month) {
+    let date = new Date(year, month, 0);
+    return date.getDate();
+  }
+
+  function getLastDayOfCurrentMonth(year, month) {
+    let date = new Date(year, month + 1, 0);
+    return date.getDate();
+  }
+
+  if (daysInWeek > 7) {
+    throw new Error("incorrect date");
+  };
+
+  for (let i = (lastDayPreviousMonth - offsetDay + 1); i <= lastDayPreviousMonth; i++) {
+    days.push({
+      dayOfMonth: i,
+      currentMonth: false,
+      selectDay: (checkInDate == i || checkOutDate == i),
+      currentDay: (i == currentDay),
+    });
+  };
+
+  for (let i = 1; i <= lastDayCurrentMonth; i++) {
+    days.push({
+      dayOfMonth: i,
+      currentMonth: true,
+      selectDay: (checkInDate == i || checkOutDate == i),
+      currentDay: (i == currentDay),
+    });
+    if (days.length >= daysInWeek) {
+      week = days.splice(0, daysInWeek);
+      calendar.push(week);
+    };
+  };
+  if ((days.length < daysInWeek) && days.length !== 0) {
+    calendar.push(days);
+    for (let i = 1; days.length < daysInWeek; i++) {
+      days.push({
+        dayOfMonth: i,
+        currentMonth: false,
+        selectDay: (checkInDate == i || checkOutDate == i),
+        currentDay: (i == currentDay),
+      });
+    };
+  };
+  return (calendar);
+};
+
+getCalendarMonth(2021, 2, 7, 15, 20);
+console.log(calendar);
+
+
+
 
 
 
