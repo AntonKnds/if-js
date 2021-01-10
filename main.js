@@ -1,4 +1,5 @@
-/*const studentsData = [
+//Clases
+const studentsData = [
   {
     firstName: 'Василий',
     lastName: 'Петров',
@@ -90,7 +91,6 @@ function addCounter() {
 };
 
 text.forEach(elem => elem.addEventListener('click', addCounter()));
-*/
 
 //Calendar
 let calendar = [];
@@ -126,7 +126,6 @@ function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
       dayOfMonth: i,
       currentMonth: false,
       selectDay: (checkInDate == i || checkOutDate == i),
-      currentDay: (i == currentDay),
     });
   };
 
@@ -135,7 +134,6 @@ function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
       dayOfMonth: i,
       currentMonth: true,
       selectDay: (checkInDate == i || checkOutDate == i),
-      currentDay: (i == currentDay),
     });
     if (days.length >= daysInWeek) {
       week = days.splice(0, daysInWeek);
@@ -149,10 +147,16 @@ function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
         dayOfMonth: i,
         currentMonth: false,
         selectDay: (checkInDate == i || checkOutDate == i),
-        currentDay: (i == currentDay),
       });
     };
   };
+  calendar.forEach((elem) => {
+    for ( let i = 0; i < elem.length; i++) {
+      if ( elem[i].dayOfMonth == currentDay) {
+        elem[i].currentDay = true;
+      }
+    }
+  })
   return (calendar);
 };
 
