@@ -1,4 +1,4 @@
-//Clases
+/*//Clases
 const studentsData = [
   {
     firstName: 'Василий',
@@ -91,7 +91,8 @@ function addCounter() {
 };
 
 text.forEach(elem => elem.addEventListener('click', addCounter()));
-
+*/
+/*
 //Calendar
 let calendar = [];
 function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
@@ -160,9 +161,53 @@ function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
   return (calendar);
 };
 
-getCalendarMonth(2021, 2, 7, 15, 20);
+getCalendarMonth(2020, 0, 7, 15, 20);
 console.log(calendar);
+*/
 
+const data = [
+  {
+    name: 'Hotel Leopold',
+    city: 'Saint Petersburg',
+    country: 'Russia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
+  },
+  {
+    name: 'Apartment Sunshine',
+    city: 'Santa  Cruz de Tenerife',
+    country: 'Spain',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
+  },
+  {
+    name: 'Villa Kunerad',
+    city: 'Vysokie Tatry',
+    country: 'Slowakia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
+  },
+  {
+    name: 'Hostel Friendship',
+    city: 'Berlin',
+    country: 'Germany',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
+  },
+];
+
+const hotels = document.getElementById('homes-wrapper');
+
+data.forEach(item => {
+  const element = document.createElement('div');
+  element.classList.add('hotels');
+  element.innerHTML = `
+    <div class="col-xs-6">
+        <div class="card">
+            <img src="${item.imageUrl}" alt="${item.country}">
+            <div class="hotelName">${item.name}</div>
+            <div class="location">${item.city}</div>
+        </div>
+    </div>
+  `;
+  hotels.appendChild(element);
+})
 
 
 
