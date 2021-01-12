@@ -1,81 +1,215 @@
-/*1*/
-const date = '2020-11-26';
-let newDate = date.split("-").reverse().join(".");
-console.log(newDate);
+/*//Clases
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
+  },
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
+  },
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
+  },
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
+  }
+]
 
-/*2*/
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  get fullName() {
+    return (this.firstName + " " + this.lastName);
+  }
+}
+
+class Student extends User {
+  constructor(firstName, lastName, admissionYear, courseName) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get course() {
+    return (new Date().getFullYear() - this.admissionYear);
+  }
+}
+
+class Students {
+  constructor(students) {
+    this.students = students.flatMap(function ({firstName, lastName, admissionYear, courseName}) {
+      return (new Student(firstName, lastName, admissionYear, courseName));
+    });
+  }
+
+  getInfo() {
+    const result = [];
+    this.students.forEach(function (element) {
+      result.push(`${element.fullName} - ${element.courseName} - ${element.course} курс`);
+    })
+    return result;
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
+
+
+//Symbol.iterator
+const text = document.querySelectorAll('p');
+
+let colors = {
+  data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+  [Symbol.iterator]() {
+    return this.data;
+  },
+  next(counter) {
+    return {value: this.data[counter], done: false}
+  }
+};
+
+function addCounter() {
+  let counter = 0;
+  return function (event) {
+    event.target.style.color = colors.next(counter).value;
+    counter = counter > 3 ? 0 : counter + 1;
+  }
+};
+
+text.forEach(elem => elem.addEventListener('click', addCounter()));
+*/
+/*
+//Calendar
+let calendar = [];
+function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
+  let days = [];
+  let week = [];
+  let lastDayPreviousMonth = getLastDayOfMonth(year, month);
+  let lastDayCurrentMonth = getLastDayOfCurrentMonth(year,month);
+  let offsetDay = offSet(year,month);
+  let currentDay = new Date().getDate();
+
+  function offSet(year, month) {
+    let date = new Date(year, month, 0);
+    return date.getDay();
+  }
+
+  function getLastDayOfMonth(year, month) {
+    let date = new Date(year, month, 0);
+    return date.getDate();
+  }
+
+  function getLastDayOfCurrentMonth(year, month) {
+    let date = new Date(year, month + 1, 0);
+    return date.getDate();
+  }
+
+  if (daysInWeek > 7) {
+    throw new Error("incorrect date");
+  };
+
+  for (let i = (lastDayPreviousMonth - offsetDay + 1); i <= lastDayPreviousMonth; i++) {
+    days.push({
+      dayOfMonth: i,
+      currentMonth: false,
+      selectDay: (checkInDate == i || checkOutDate == i),
+    });
+  };
+
+  for (let i = 1; i <= lastDayCurrentMonth; i++) {
+    days.push({
+      dayOfMonth: i,
+      currentMonth: true,
+      selectDay: (checkInDate == i || checkOutDate == i),
+    });
+    if (days.length >= daysInWeek) {
+      week = days.splice(0, daysInWeek);
+      calendar.push(week);
+    };
+  };
+  if ((days.length < daysInWeek) && days.length !== 0) {
+    calendar.push(days);
+    for (let i = 1; days.length < daysInWeek; i++) {
+      days.push({
+        dayOfMonth: i,
+        currentMonth: false,
+        selectDay: (checkInDate == i || checkOutDate == i),
+      });
+    };
+  };
+  calendar.forEach((elem) => {
+    for ( let i = 0; i < elem.length; i++) {
+      if ( elem[i].dayOfMonth == currentDay) {
+        elem[i].currentDay = true;
+      }
+    }
+  })
+  return (calendar);
+};
+
+getCalendarMonth(2020, 0, 7, 15, 20);
+console.log(calendar);
+*/
+
 const data = [
   {
-    country: 'Russia',
+    name: 'Hotel Leopold',
     city: 'Saint Petersburg',
-    hotel: 'Hotel Leopold',
+    country: 'Russia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
   },
   {
+    name: 'Apartment Sunshine',
+    city: 'Santa  Cruz de Tenerife',
     country: 'Spain',
-    city: 'Santa Cruz de Tenerife',
-    hotel: 'Apartment Sunshine',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
   },
   {
-    country: 'Slowakia',
+    name: 'Villa Kunerad',
     city: 'Vysokie Tatry',
-    hotel: 'Villa Kunerad',
+    country: 'Slowakia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
   },
   {
-    country: 'Germany',
+    name: 'Hostel Friendship',
     city: 'Berlin',
-    hotel: 'Hostel Friendship',
-  },
-  {
-    country: 'Indonesia',
-    city: 'Bali',
-    hotel: 'Ubud Bali Resort&SPA',
-  },
-  {
-    country: 'Netherlands',
-    city: 'Rotterdam',
-    hotel: 'King Kong Hostel',
-  },
-  {
-    country: 'Marocco',
-    city: 'Ourika',
-    hotel: 'Rokoko Hotel',
-  },
-  {
     country: 'Germany',
-    city: 'Berlin',
-    hotel: 'Hotel Rehberge Berlin Mitte',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
   },
 ];
 
-const findWord = function(str) {
-  let newStr = new RegExp(str, 'ig');
-  data.forEach(function (i) {
-    if (newStr.test(i["country"]) || (newStr.test(i["city"])) || (newStr.test(i["hotel"]))) {
-      console.log ("Страна: " + i["country"] + "\nГород: " + i["city"] + "\nОтель: " + i["hotel"]);
-    }
-  });
-}
-findWord('ri');
+const hotels = document.getElementById('homes-wrapper');
 
-function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
-  let calendar = [];
-  let days = [];
-  if (dayOfWeek !== 0) {
-    for (let i = (daysInMonth - dayOfWeek+2); i <= daysInMonth; i++) {
-      days.push(i);
-    }
-  }
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push(i);
-  }
-  for (let j = 0; j <= (daysInMonth / daysInWeek); j++) {
-    calendar.push(days.splice(0,daysInWeek));
-    let currentWeek = calendar[j];
-      for (let i = 1; currentWeek.length < daysInWeek; i++) {
-        currentWeek.push(i);
-    }
-  }
-console.log(calendar);
-}
-getCalendarMonth(30,6, 2);
+data.forEach(item => {
+  const element = document.createElement('div');
+  element.classList.add('hotels');
+  element.innerHTML = `
+    <div class="col-xs-6">
+        <div class="card">
+            <img src="${item.imageUrl}" alt="${item.country}">
+            <div class="hotelName">${item.name}</div>
+            <div class="location">${item.city}</div>
+        </div>
+    </div>
+  `;
+  hotels.appendChild(element);
+})
+
+
+
+
 
