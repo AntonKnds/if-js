@@ -165,39 +165,18 @@ getCalendarMonth(2020, 0, 7, 15, 20);
 console.log(calendar);
 */
 
-const data = [
-  {
-    name: 'Hotel Leopold',
-    city: 'Saint Petersburg',
-    country: 'Russia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
-  },
-  {
-    name: 'Apartment Sunshine',
-    city: 'Santa  Cruz de Tenerife',
-    country: 'Spain',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
-  },
-  {
-    name: 'Villa Kunerad',
-    city: 'Vysokie Tatry',
-    country: 'Slowakia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
-  },
-  {
-    name: 'Hostel Friendship',
-    city: 'Berlin',
-    country: 'Germany',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
-  },
-];
-
+let arr;
 const hotels = document.getElementById('homes-wrapper');
 
-data.forEach(item => {
-  const element = document.createElement('div');
-  element.classList.add('hotels');
-  element.innerHTML = `
+fetch('https://fe-student-api.herokuapp.com/api/hotels/popular', {
+  method: "GET"
+}).then(data => data.text())
+  .then(data => {
+    arr = JSON.parse(data);
+    arr.forEach(item => {
+      const element = document.createElement('div');
+      element.classList.add('hotelCard');
+      element.innerHTML = `
     <div class="col-xs-6">
         <div class="card">
             <img src="${item.imageUrl}" alt="${item.country}">
@@ -206,8 +185,9 @@ data.forEach(item => {
         </div>
     </div>
   `;
-  hotels.appendChild(element);
-})
+      hotels.appendChild(element);
+    })
+  })
 
 
 
