@@ -165,18 +165,19 @@ getCalendarMonth(2020, 0, 7, 15, 20);
 console.log(calendar);
 */
 
-let arr;
-const hotels = document.getElementById('homes-wrapper');
 
-fetch('https://fe-student-api.herokuapp.com/api/hotels/popular', {
-  method: "GET"
-}).then(data => data.text())
-  .then(data => {
-    arr = JSON.parse(data);
-    arr.forEach(item => {
-      const element = document.createElement('div');
-      element.classList.add('hotelCard');
-      element.innerHTML = `
+const hotels = document.getElementById('homes-wrapper');
+let arr = [];
+(async () => {
+  const data = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular', {
+    method: "GET"
+  }).then(data => data.text())
+    .then(data => {
+      arr = JSON.parse(data);
+      arr.forEach(item => {
+        const element = document.createElement('div');
+        element.classList.add('hotelCard');
+        element.innerHTML = `
     <div class="col-xs-6">
         <div class="card">
             <img src="${item.imageUrl}" alt="${item.country}">
@@ -185,11 +186,10 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular', {
         </div>
     </div>
   `;
-      hotels.appendChild(element);
+        hotels.appendChild(element);
+      })
     })
-  })
-
-
-
-
-
+  if (!data.ok) {
+    console.log('Error!!')
+  }
+})();
