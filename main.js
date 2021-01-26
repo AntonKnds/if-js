@@ -167,17 +167,19 @@ console.log(calendar);
 
 
 const hotels = document.getElementById('homes-wrapper');
-let arr = [];
+let arr;
 (async () => {
   const data = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular', {
     method: "GET"
-  }).then(data => data.text())
-    .then(data => {
-      arr = JSON.parse(data);
-      arr.forEach(item => {
-        const element = document.createElement('div');
-        element.classList.add('hotelCard');
-        element.innerHTML = `
+  }).then((response) => response.text())
+    .then((data) => JSON.parse(data))
+  if (!data) {
+    console.log('Error!!')
+  }
+  data.forEach(item => {
+    const element = document.createElement('div');
+    element.classList.add('hotelCard');
+    element.innerHTML = `
     <div class="col-xs-6">
         <div class="card">
             <img src="${item.imageUrl}" alt="${item.country}">
@@ -186,10 +188,6 @@ let arr = [];
         </div>
     </div>
   `;
-        hotels.appendChild(element);
-      })
-    })
-  if (!data.ok) {
-    console.log('Error!!')
-  }
+    hotels.appendChild(element);
+  });
 })();
