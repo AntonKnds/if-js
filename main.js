@@ -165,6 +165,8 @@ getCalendarMonth(2020, 0, 7, 15, 20);
 console.log(calendar);
 */
 
+
+//sessionStorage
 const hotels = document.getElementById('homes-wrapper');
 let arr;
 (async () => {
@@ -184,7 +186,7 @@ let arr;
     const element = document.createElement('div');
     element.classList.add('hotelCard');
     element.innerHTML = `
-    <div class="col-xs-6">
+    <div class="col-xs-3">
         <div class="card">
             <img src="${item.imageUrl}" alt="${item.country}">
             <div class="hotelName">${item.name}</div>
@@ -195,3 +197,26 @@ let arr;
     hotels.appendChild(element);
   });
 })();
+
+// formData
+
+const formEl = document.getElementById('form');
+formEl.addEventListener('submit', async event => {
+  event.preventDefault();
+  const fetchOptions = {
+    method: 'POST',
+    body: new FormData(formEl),
+  };
+
+  const res = await fetch('https://fe-student-api.herokuapp.com/api/file', fetchOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then(result => result)
+    .catch(error => console.log(error.message));
+  console.log(res);
+});
+
