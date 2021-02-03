@@ -164,8 +164,6 @@ function getCalendarMonth(year, month, daysInWeek, checkInDate, checkOutDate) {
 getCalendarMonth(2020, 0, 7, 15, 20);
 console.log(calendar);
 */
-
-
 //sessionStorage
 const hotels = document.getElementById('homes-wrapper');
 let arr;
