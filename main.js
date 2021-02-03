@@ -199,7 +199,6 @@ let arr;
 })();
 
 // formData
-
 const formEl = document.getElementById('form');
 formEl.addEventListener('submit', async event => {
   event.preventDefault();
